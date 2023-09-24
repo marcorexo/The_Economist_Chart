@@ -5,21 +5,6 @@ library(ggplot2)
 library(ggthemes)
 library(data.table)
 
-df <- fread("Economist_Assignment_Data.csv", drop = 1)
-
-# Use ggplot() + geom_point() to create a scatter plot object 
-# called pl. You will need to specify x=CPI and y=HDI and 
-# color=Region as aesthetics
-
-pl <- ggplot(df, aes(x=CPI, y=HDI))
-pl + geom_point(aes(color=Region))
-
-
-# Change the points to be larger empty circles. 
-# (You'll have to go back and add arguments to geom_point() 
-# and reassign it to pl.) You'll need to figure out what 
-# shape= and size=
-
 pointsToLabel <- c("Russia", "Venezuela", "Iraq", "Myanmar", "Sudan",
                    "Afghanistan", "Congo", "Greece", "Argentina", "Brazil",
                    "India", "Italy", "China", "South Africa", "Spane",
@@ -27,6 +12,10 @@ pointsToLabel <- c("Russia", "Venezuela", "Iraq", "Myanmar", "Sudan",
                    "United States", "Germany", "Britain", "Barbados", "Norway", "Japan",
                    "New Zealand", "Singapore")
 
+df <- fread("Economist_Assignment_Data.csv", drop = 1)
+
+
+# Change the points to be larger empty circles. 
 pl <- ggplot(df, aes(x=CPI, y=HDI))
 pl2 <- pl + geom_point(aes(color=Region), size = 4, shape=1, na.rm = T) + geom_text(aes(label = Country), color = "gray20", 
                                                                                     data = subset(df, Country %in% pointsToLabel),check_overlap = TRUE) 
